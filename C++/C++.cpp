@@ -1,5 +1,5 @@
 // C++.cpp : Defines the entry point for the console application.
-//
+
 
 #include "stdafx.h"
 #include<iostream>
@@ -16,6 +16,8 @@ struct list1
 };
 list1 *root;
 void menu();
+void bubble();
+void reverse();
 int main()
 {
 	cout << "enter root node";
@@ -140,6 +142,8 @@ void menu()
 	cout << "5  delete at front" << endl;
 	cout << "6  delete at position" << endl;
 	cout << "7  Show" << endl;
+	cout << "8  Sorting" << endl;
+	cout << "9 reverse list" << endl;
 	int m;
 	cin >> m;
 	switch (m)
@@ -172,8 +176,71 @@ void menu()
 		show();
 		break;
 	}
+	case 8: {
+		bubble();
+		break;
+	}
+	case 9: {
+		reverse();
+		break;
+	}
 	default: {
 		exit(1);
 	}
 	};
+}
+
+void bubble()
+{
+	int t;
+	list1 *last, *temp, *temp1;
+	temp = root;
+	while (temp->next != NULL)
+		temp = temp->next;
+	last = NULL;
+	temp = root;
+	temp1 = root;
+	while (temp1->next != NULL)
+	{
+		while (temp->next != last)
+		{	
+			if (temp->data > (temp->next->data))
+			{
+				t = temp->data;
+				temp->data = temp->next->data;
+				temp->next->data = t;
+			}
+			temp = temp->next;
+		}	
+		last = temp;
+		temp1 = temp1->next;
+		temp = root;
+	}
+	cout << "list is sorted ...." << endl;
+	_getch();
+	menu;
+}
+
+void reverse()
+{
+	list1 *temp, *prev, *next;
+	temp = root;
+	prev = NULL;
+	next = NULL;
+	while (temp != NULL)
+	{
+		next = temp->next;
+		temp->next = prev;
+		prev = temp;
+		temp = next;
+	}
+	root = prev;
+	cout << "link list reversed...";
+	_getch();
+	menu();
+}
+
+void sortNeg(list1* head)
+{
+	
 }
